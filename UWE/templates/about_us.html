@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel = "stylesheet" type="text/css" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{%include 'navbar.html'%}
+<body style=" background-color: #F5F5DC;">
+<div style="margin: 20px;">
+<h1 style="display: flex; font-size: 35px; justify-content: center; align-items: center;color:#292b2c;"><strong><em>About Us</em></strong></h1>
+    </div>
+
+<p style="font-style: italic; font-size: 25px;">
+
+          Welcome to UweFlix, the home to your very own local cinema. Here we are proud to present you the joy of
+        viewing the available films locally in your area as a student.
+        <br>
+        Are Family visiting you on the weekend? No problem at UweFlix cinema we sell a variety of tickets so that you can enjoy
+        your experience with many others.
+        <br>
+        Feel free to apply any discounts you have been awarded with on the offers and discounts page.
+<br>
+    <br>
+</p>
+    {%if user.is_authenticated%}
+<div class="buy-tickets">
+    <a href="{%url 'films'%}"><button style="margin: 50px; padding: 50px;   position: absolute; top: 50%;left: 41%;" class="btn btn-outline-secondary add-btn update-cart" >Buy Tickets</button></a>
+</div>
+
+{%endif%}
+</body>
+</html>

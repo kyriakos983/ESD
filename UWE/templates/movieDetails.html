@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{%load static %}
+{%load crispy_forms_tags%}
+<html lang="en">
+<head>
+    <link rel = "stylesheet" type="text/css" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body style=" background-color: #F5F5DC;">
+{%include 'navbar.html' %}
+<div style="text-align: right;">
+<a class="btn btn-outline-warning" href="{%url 'films'%}">Back to Films </a>
+  </div>
+<main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <img src="{{movie.imageURL}}" class="img-fluid">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!--Content-->
+          <div class="p-4">
+
+
+            <p style="font-size: 30px;">{{ movie.name }}</p>
+             <p class="lead">
+
+               <span><strong><em>£ {{ movie.ticketPrice }}</em></strong></span>
+
+            </p>
+
+            {% comment %} <form class="d-flex justify-content-left">
+              <!-- Default input -->
+              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">
+                Add to cart
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </button>
+
+            </form> {% endcomment %}
+
+            <a href="#" class="btn btn-danger btn-md my-0 p">
+              Buy Tickets
+            </a>
+
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 text-center">
+
+          <h4 class="my-4 h4">Movie Description</h4>
+
+          <p>{{movie.description}} </p>
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+          <h1>Authors</h1>
+          <p><em><strong>Written By:</strong></em>{{movie.author}}</p>
+
+
+
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <h1>Actors</h1>
+          <p><em><strong>actor 1:</strong></em>  {{movie.actor1}}</p>
+           <p><em><strong>actor 2:</strong></em>  {{movie.actor2}}</p>
+           <p><em><strong>actor 3:</strong></em>  {{movie.actor3}}</p>
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <h1>Movie Information</h1>
+          <p><em><strong>Screen:</strong></em>  {{movie.screen}}</p>
+          <p><em><strong>Duration:</strong></em>  {{movie.duration}}</p>
+          <p><em><strong>AgeRating:</strong></em>  {{movie.ageRating}}</p>
+          <p><em><strong>Type:</strong></em>  {{movie.type}}</p>
+
+
+
+
+
+        </div>
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+</body>
+</html>
