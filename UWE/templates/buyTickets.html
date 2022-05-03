@@ -19,13 +19,18 @@
 <br>
 
 <div style="text-align: center;" class=" form-group">
-    <form  method="POST">
-        {%csrf_token%}
-        <img style="text-align: center;"  src="{{movie.imageURL}}">
-        <br>
-        <input style=" margin: 50px;" type = 'submit' class="btn btn-success" value="Purchase Tickets">
-    </form>
-
+    <div class="container">
+        <form  method="POST">
+            {%csrf_token%}
+            <img style="text-align: left;"  src="{{movie.imageURL}}">
+            <br>
+            <p>How many tickets would you like to purchase for <strong>{{ movie.name }}?</strong></p>
+            Tickets:
+            <input style=" margin: 20px;" type="number" value="Tickets">
+            <p>Continue to purchase if you are ready to book {{ ticket.quantity }} tickets</p>
+            <input style=" margin: 50px;" type = 'submit' class="btn btn-success" value="Purchase Tickets">
+        </form>
+    </div>
 </div>
 </body>
 </html>

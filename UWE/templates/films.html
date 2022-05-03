@@ -24,11 +24,19 @@
         <img class=" thumbnail" src="{{movie.imageURL}}">
         <div class="box-element product">
                 <h1 style =" font-size: 20px">{{movie.name}}</h1>
+                    <h6>{{ movie.screen }}</h6>
+
+
                   <hr>
            <!--Student selections-->
             {% if user.accountOptions == 'is_student' %}
                   <a href="{%url 'buyTickets' movie.id%}" class="btn btn-outline-secondary " >Buy Tickets</a>
                   <a class ="btn btn-outline-success" href="/product/{{movie.name}}/{{movie.id}}"> View Details</a>
+                  <a class="btn btn-outline-info dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">Film Times</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item">{{movie.times}}</a>
+                        </div>
             <!--Cinema manager selections-->
                     {% elif user.accountOptions == 'is_cinema_manager' %}
                 <a class ="btn btn-outline-success" href="{%url 'update_movie_details' movie.id%}" > Update Movie Details</a>

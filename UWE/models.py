@@ -1,4 +1,6 @@
+from datetime import datetime
 
+from django.conf import settings
 from django.db import models
 from allAccounts.models import *
 
@@ -52,10 +54,21 @@ class screenChoices(models.TextChoices):
     screen5 = 'screen5'
 
 
+class movieTimes(models.TextChoices):
+    time1 = '11:10'
+    time2 = '12:15'
+    time3 = '15:30'
+    time4 = '17:15'
+    time5 = '18:00'
+    time6 = '17:45'
+
+
+
 # This contains all the details regarding the movies and screen showing
 class Movies(models.Model):
     name = models.CharField(max_length=50)
     screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
+    times = models.CharField(max_length=50, choices=movieTimes.choices, null=True, blank=True)
     ticketPrice = models.IntegerField()
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     # setting the capacity of the screen show by limiting the tickets to 300 mentioned in the requirements
@@ -64,7 +77,7 @@ class Movies(models.Model):
     actor2 = models.CharField(max_length=100, null=True, blank=True)
     actor3 = models.CharField(max_length=100, null=True, blank=True)
     ageRating = models.IntegerField(null=True, blank=True)
-    duration = models.TimeField(null=True, blank=True)
+    duration = models.CharField(max_length=15, null=True, blank=True)
     description = models.CharField(max_length=500, null=True, blank=True)
     author = models.CharField(max_length=50, null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
@@ -100,7 +113,6 @@ class TicketDiscount(models.Model):
 
 
 class ticket(models.Model):
-
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
     movie = models.OneToOneField(Movies, on_delete=models.CASCADE, default=None)
     first_name = models.CharField(max_length=50)
@@ -109,5 +121,21 @@ class ticket(models.Model):
     price = models.IntegerField()
 
 
+# Booking system allows payment type specified to credits, payment authorises when user has paid
+class bookingReservation(models.Model):
+    payment_type = (
+        ('Credits', 'Credits'),
+    )
+    payment_type = models.CharField(max_length=11, choices=payment_type, default='Credits')
+    amount_paid = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
 
+class seatsAvailable(models.Model):
+    seat_choice = (
+        ('', 'Select'),
+        ('Regular', 'Regular'),
+        ('V.I.P', 'V.I.P')
+    )
+    seat_type = models.CharField(max_length=8, choices=seat_choice, blank=False)
+    row = models.PositiveSmallIntegerField()
+    col = models.PositiveSmallIntegerField()

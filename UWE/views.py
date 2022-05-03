@@ -40,6 +40,7 @@ def BuyTicketsView(request, id):
     movie = get_object_or_404(Movies, pk=id)
     return render(request, 'buyTickets.html', {'movie': movie})
 
+
 # this is for cinema manager
 def addMovie(request):
     if request.method == 'POST':
