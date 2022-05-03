@@ -67,12 +67,10 @@ class movieTimes(models.TextChoices):
 # This contains all the details regarding the movies and screen showing
 class Movies(models.Model):
     name = models.CharField(max_length=50)
-    screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
-    times = models.CharField(max_length=50, choices=movieTimes.choices, null=True, blank=True)
     ticketPrice = models.IntegerField()
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     # setting the capacity of the screen show by limiting the tickets to 300 mentioned in the requirements
-    tickets = models.IntegerField(default=0, max_length=300)
+
     actor1 = models.CharField(max_length=100, null=True, blank=True)
     actor2 = models.CharField(max_length=100, null=True, blank=True)
     actor3 = models.CharField(max_length=100, null=True, blank=True)
@@ -95,6 +93,11 @@ class Movies(models.Model):
         return url
 
 
+class ScreenShowing(models.Model):
+    movie = models.ForeignKey(Movies,on_delete=models.CASCADE)
+    screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
+    tickets = models.IntegerField(default=0, max_length=300)
+    times = models.CharField(max_length=50, choices=movieTimes.choices, null=True, blank=True)
 class TicketDiscount(models.Model):
     total_price = models.IntegerField(default=False)
     sale_price = models.IntegerField(default=False)

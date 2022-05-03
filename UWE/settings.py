@@ -50,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'UWE.urls'
@@ -80,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'uweflix',
         'USER': 'root',
-        'PASSWORD': 'RootForm21',
+        'PASSWORD': 'siamplettos3K',
         'PORT': '3306',
         'HOST': '127.0.0.1',
     }
@@ -135,3 +137,6 @@ AUTH_USER_MODEL = 'allAccounts.user'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 SITE_ID = 1
+
+SESSION_COOKIE_AGE = 20
+

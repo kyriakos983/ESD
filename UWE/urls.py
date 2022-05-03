@@ -31,6 +31,7 @@ urlpatterns = [
     path('films', views.MoviesView, name='films'),
     path('offers&discounts', views.DiscountView, name='offers&discounts'),
     path('add-movie', views.addMovie, name='add-movie'),
+    path('add-Showing', views.addScreenShowing, name='add-showing'),
     path('jsi18n', JavaScriptCatalog.as_view(), name='js-catalog'),
     path('add-club', views.addClub, name='add-club'),
     path('add-club-rep', views.addClubRep, name='add-club-rep'),

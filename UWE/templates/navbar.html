@@ -21,7 +21,7 @@
    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{%url 'films'%}" style="color: #d4c27d;"><strong>| Films |</strong> <span class="sr-only"></span></a>
+        <a class="nav-link" href="{%url 'films'%}" style="color: #d4c27d;"><strong>| Film Showings |</strong> <span class="sr-only"></span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'about_us'%}" style="color: #d4c27d;"><strong>| About Us |</strong><span class="sr-only"></span></a>
@@ -47,6 +47,10 @@
         </li>
 
         <li class="nav-item active">
+        <a class="nav-link" href="{%url 'add-showing'%}" style="color: #d4c27d;"><strong>| Add Showing |</strong><span class="sr-only"></span></a>
+        </li>
+
+        <li class="nav-item active">
         <a class="nav-link" href="{%url 'add-club'%}" style="color: #d4c27d;"><strong>| Add Student Club |</strong><span class="sr-only"></span></a>
         </li>
          <li class="nav-item active">
@@ -54,7 +58,7 @@
         </li>
 
         {% elif user.accountOptions == 'is_accounts_manager' %}
-          <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent3">
     <ul class="navbar-nav mr-auto">
            <li class="nav-item active">
         <a class="nav-link" href="{%url 'films'%}" style="color: #d4c27d;"><strong>| Films |</strong> <span class="sr-only"></span></a>

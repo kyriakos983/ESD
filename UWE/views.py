@@ -52,6 +52,16 @@ def addMovie(request):
         form = MovieForm()
     return render(request, 'addFilm.html', {'form': form})
 
+#Set screen showing for movies
+def addScreenShowing(request):
+    if request.method == 'POST':
+        form = ScreenShowingForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('addShowing.html')
+    else:
+        form = ScreenShowingForm()
+    return render(request, 'addShowing.html', {'form': form})
 
 # this is for cinema manager
 def delete_movie(request, id):

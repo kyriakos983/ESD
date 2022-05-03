@@ -2,6 +2,9 @@ from django.contrib.admin import widgets
 from django.forms import ModelForm
 from .models import Movies, ticket, Club, ClubRep
 from django.forms.widgets import DateInput
+from allAccounts.models import User
+from .models import Movies, ticket, Club, ClubRep, ScreenShowing
+
 from django.forms.widgets import TimeInput
 from django import forms
 from .models import Movies, ticket, Club, ClubRep
@@ -35,4 +38,15 @@ class AddClubRepForm(ModelForm):
 
     class Meta:
         model = ClubRep
+        fields = '__all__'
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = '__all__'
+        exclude = ('accountOptions', )
+
+class ScreenShowingForm(ModelForm):
+    class Meta:
+        model = ScreenShowing
         fields = '__all__'
