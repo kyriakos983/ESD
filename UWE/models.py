@@ -25,11 +25,9 @@ class ClubRep(models.Model):
     club = models.OneToOneField(Club, on_delete=models.CASCADE)
     clubRepFirstName = models.CharField(max_length=50)
     clubRepLastName = models.CharField(max_length=50)
+    dob = models.DateField(default=datetime.strptime('2022-05-04', '%Y-%m-%d'))
     club_rep_number = models.CharField(max_length=11)
     club_rep_email = models.EmailField(max_length=100, null=True)
-
-    def __str__(self):
-        return self.clubRepFirstName
 
 
 # movie types choices
@@ -51,16 +49,6 @@ class screenChoices(models.TextChoices):
     screen3 = 'screen3'
     screen4 = 'screen4'
     screen5 = 'screen5'
-
-
-class movieTimes(models.TextChoices):
-    time1 = '11:10'
-    time2 = '12:15'
-    time3 = '15:30'
-    time4 = '17:15'
-    time5 = '18:00'
-    time6 = '17:45'
-
 
 
 # This contains all the details regarding the movies
@@ -96,7 +84,6 @@ class ScreenShowing(models.Model):
     movie = models.ForeignKey(Movies,on_delete=models.CASCADE)
     screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
     tickets = models.IntegerField(default=300, max_length=300)
-    Showings = models.CharField(max_length=50, choices=movieTimes.choices, null=True, blank=True)
 
 
 class TicketDiscount(models.Model):

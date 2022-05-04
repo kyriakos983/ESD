@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.admin import widgets
 from django.forms import ModelForm
 from .models import Movies, ticket, Club, ClubRep
@@ -31,14 +33,24 @@ class AddClubForm(ModelForm):
         model = Club
         fields = '__all__'
 
-
+def dob_validation(value):
+    if value > datetime.date.today():
+        raise forms.ValidationError('Error enter date before current year')
+    return value
 class AddClubRepForm(ModelForm):
-    Date_Of_Birth = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
-    # time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
+    date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
+    time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
+    dob = forms.DateField(validators=[dob_validation])
 
     class Meta:
         model = ClubRep
         fields = '__all__'
+        labels = {
+            'dob': 'Date of Birth',
+        }
+        widgets = {
+            'dob': DateInput(attrs={'type': 'date'})
+        }
 
 class UserForm(ModelForm):
     class Meta:
@@ -47,6 +59,7 @@ class UserForm(ModelForm):
         exclude = ('accountOptions', )
 
 class ScreenShowingForm(ModelForm):
+    time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
     class Meta:
         model = ScreenShowing
         fields = '__all__'
