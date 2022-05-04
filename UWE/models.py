@@ -95,7 +95,7 @@ class Movies(models.Model):
 class ScreenShowing(models.Model):
     movie = models.ForeignKey(Movies,on_delete=models.CASCADE)
     screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
-    tickets = models.IntegerField(default=0, max_length=300)
+    tickets = models.IntegerField(default=300, max_length=300)
     Showings = models.CharField(max_length=50, choices=movieTimes.choices, null=True, blank=True)
 
 
