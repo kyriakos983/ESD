@@ -12,7 +12,7 @@ class Club(models.Model):
     postCode = models.CharField(max_length=10)
     house_num = models.IntegerField()
     city = models.CharField(max_length=50)
-    phone_num = models.IntegerField()
+    phone_num = models.BigIntegerField()
     email = models.EmailField(max_length=100)
     clubID = models.IntegerField()
 
@@ -25,7 +25,6 @@ class ClubRep(models.Model):
     club = models.OneToOneField(Club, on_delete=models.CASCADE)
     clubRepFirstName = models.CharField(max_length=50)
     clubRepLastName = models.CharField(max_length=50)
-    dob = models.DateField()
     club_rep_number = models.CharField(max_length=11)
     club_rep_email = models.EmailField(max_length=100, null=True)
 
@@ -64,11 +63,12 @@ class movieTimes(models.TextChoices):
 
 
 
-# This contains all the details regarding the movies and screen showing
+# This contains all the details regarding the movies
 class Movies(models.Model):
     name = models.CharField(max_length=50)
     ticketPrice = models.IntegerField()
     image = models.ImageField(upload_to='images/', null=True, blank=True)
+
     # setting the capacity of the screen show by limiting the tickets to 300 mentioned in the requirements
 
     actor1 = models.CharField(max_length=100, null=True, blank=True)
@@ -92,12 +92,13 @@ class Movies(models.Model):
             url = ''
         return url
 
-
 class ScreenShowing(models.Model):
     movie = models.ForeignKey(Movies,on_delete=models.CASCADE)
     screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
     tickets = models.IntegerField(default=0, max_length=300)
-    times = models.CharField(max_length=50, choices=movieTimes.choices, null=True, blank=True)
+    Showings = models.CharField(max_length=50, choices=movieTimes.choices, null=True, blank=True)
+
+
 class TicketDiscount(models.Model):
     total_price = models.IntegerField(default=False)
     sale_price = models.IntegerField(default=False)
@@ -131,6 +132,7 @@ class bookingReservation(models.Model):
     )
     payment_type = models.CharField(max_length=11, choices=payment_type, default='Credits')
     amount_paid = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    paid_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null=True, blank=True)
 
 
 class seatsAvailable(models.Model):

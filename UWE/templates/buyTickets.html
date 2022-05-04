@@ -24,10 +24,16 @@
             {%csrf_token%}
             <img style="text-align: left;"  src="{{movie.imageURL}}">
             <br>
-            <p>How many tickets would you like to purchase for <strong>{{ movie.name }}?</strong></p>
+            <h2>Select screen Showing</h2>
+             <a class="btn btn-outline-info dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">Film Times</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item">{{showing.times}}</a>
+                        </div>
+            <h2>How many tickets would you like to purchase for <strong>{{ movie.name }}?</strong></h2>
             Tickets:
             <input style=" margin: 20px;" type="number" value="Tickets">
-            <p>Continue to purchase if you are ready to book {{ ticket.quantity }} tickets</p>
+            <h2>Continue to purchase if you are ready to book {{ ticket.quantity }} tickets</h2>
             <input style=" margin: 50px;" type = 'submit' class="btn btn-success" value="Purchase Tickets">
         </form>
     </div>

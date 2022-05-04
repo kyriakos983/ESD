@@ -33,8 +33,8 @@ class AddClubForm(ModelForm):
 
 
 class AddClubRepForm(ModelForm):
-    date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
-    time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
+    Date_Of_Birth = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
+    # time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
 
     class Meta:
         model = ClubRep

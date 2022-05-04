@@ -19,7 +19,7 @@ from UWE import views
 from django.conf.urls.static import static
 from django.conf import settings
 
-from UWE.views import updateMovieView
+from UWE.views import updateMovieView, updateShowings
 
 from django.views.i18n import JavaScriptCatalog
 
@@ -37,6 +37,7 @@ urlpatterns = [
     path('add-club-rep', views.addClubRep, name='add-club-rep'),
     path('delete_movie/<int:id>', views.delete_movie, name='delete_movie'),
     path('<int:pk>/update_movie_details/', updateMovieView.as_view(), name='update_movie_details'),
+    path('<int:pk>/update_showing_details/', updateShowings.as_view(), name='update_showing_details'),
     path('product/<str:name>/<int:id>', views.movie_details, name='movieDetails'),
     path('tickets/<int:id>', views.BuyTicketsView, name='buyTickets')
 

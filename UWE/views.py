@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, ListView
 from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 from django import forms
 
@@ -28,6 +28,10 @@ def MoviesView(request):
     context = {'movies': movies}
     return render(request, 'films.html', context)
 
+class screenListView(ListView):
+    def get_queryset(self):
+        return ScreenShowing.objects.all().order_by('name')
+
 
 def DiscountView(request):
     discounts = TicketDiscount.objects.annotate(offer=((F('total_price') - F('sale_price')) / F('total_price')) * 100)
@@ -52,7 +56,7 @@ def addMovie(request):
         form = MovieForm()
     return render(request, 'addFilm.html', {'form': form})
 
-#Set screen showing for movies
+#Set screen showing for movies (CINEMA MANAGER)
 def addScreenShowing(request):
     if request.method == 'POST':
         form = ScreenShowingForm(request.POST, request.FILES)
@@ -62,6 +66,16 @@ def addScreenShowing(request):
     else:
         form = ScreenShowingForm()
     return render(request, 'addShowing.html', {'form': form})
+
+class updateShowings(UpdateView):
+    model = ScreenShowing
+    fields = '__all__'
+    template_name = 'updateShowing.html'
+    success_url = reverse_lazy('home')
+
+    @staticmethod
+    def get_absolute_url():
+        return reverse('home')
 
 # this is for cinema manager
 def delete_movie(request, id):
