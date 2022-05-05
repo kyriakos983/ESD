@@ -29,12 +29,6 @@ def MoviesView(request):
     movies = Movies.objects.all()
     context = {'movies': movies}
     return render(request, 'films.html', context)
-"""
-def DiscountView(request):
-    discounts = TicketDiscount.objects.annotate(offer=((F('total_price') - F('sale_price')) / F('total_price')) * 100)
-    context = {'discounts': discounts}
-    return render(request, 'offersAndDiscounts.html', context)
-"""
 
 # this is the buy tickets view for students
 def BuyTicketsView(request, id):
