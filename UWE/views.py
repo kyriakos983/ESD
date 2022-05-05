@@ -39,7 +39,16 @@ def DiscountView(request):
 # this is the buy tickets view for students
 def BuyTicketsView(request, id):
     movie = get_object_or_404(Movies, pk=id)
-    return render(request, 'buyTickets.html', {'movie': movie})
+    name = request.user
+    if request.method == 'POST':
+        form = BookingForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('checkout')
+    else:
+        form = BookingForm()
+    context = {'movie': movie,'form': form}
+    return render(request, 'buyTickets.html', context)
 
 
 # this is for cinema manager

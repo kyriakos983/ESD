@@ -41,27 +41,22 @@
             </p>
 
               <!-- Default input -->
-              <a class="btn btn-outline-info dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false">Film Times</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item">{{showing.times}}</a>
-                        </div>
+              <div class=" form-group">
+        <div class="container">
+        <form  method="POST" enctype="multipart/form-data">
 
+        {%csrf_token%}
+          {{ form.media }}
+        {{ form|crispy }}
+        <a href="{%url 'checkout'%}"> <input type = 'submit' class="btn btn-secondary" value="Checkout"></a>
+        </form>
 
-
-          <h1 style="font-size: 15px;" class="my-4 h4">Select Ticket quantity</h1>
-          <input style=" margin: 20px;" type="number" value="Tickets">
-              <br>
-
-            <a class ="btn btn-outline-success" href="{%url 'checkout'%}"> Checkout</a>
-            </div>
 
           </div>
         </div>
       </div>
     </div>
   </main>
-<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 </body>
 </html>
 

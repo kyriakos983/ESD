@@ -87,29 +87,16 @@ class Screen(models.Model):
 
 
 class Booking(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    mobile = models.IntegerField()
+    age = models.IntegerField()
     movie = models.ForeignKey(Movies,on_delete=models.CASCADE)
     screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
+    seats = models.CharField(max_length = 100, null=True, blank=True)
 
 
 
 
 
-# Booking system allows payment type specified to credits, payment authorises when user has paid
-class bookingReservation(models.Model):
-    payment_type = (
-        ('Credits', 'Credits'),
-    )
-    payment_type = models.CharField(max_length=11, choices=payment_type, default='Credits')
-    amount_paid = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
-    paid_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null=True, blank=True)
 
-
-class seatsAvailable(models.Model):
-    seat_choice = (
-        ('', 'Select'),
-        ('Regular', 'Regular'),
-        ('V.I.P', 'V.I.P')
-    )
-    seat_type = models.CharField(max_length=8, choices=seat_choice, blank=False)
-    row = models.PositiveSmallIntegerField()
-    col = models.PositiveSmallIntegerField()

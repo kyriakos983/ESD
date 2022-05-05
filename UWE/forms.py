@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.contrib.admin import widgets
 from django.forms import ModelForm
-from .models import Movies,Club, ClubRep
+from .models import Movies, Club, ClubRep, Booking
 from django.forms.widgets import DateInput
 from allAccounts.models import User
 from .models import Movies, Club, ClubRep, Screen
@@ -57,4 +57,11 @@ class ScreenShowingForm(ModelForm):
     time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
     class Meta:
         model = Screen
+        fields = '__all__'
+
+
+
+class BookingForm(ModelForm):
+    class Meta:
+        model = Booking
         fields = '__all__'
