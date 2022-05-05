@@ -21,23 +21,20 @@ def about_us(request):
     context = {}
     return render(request, 'about_us.html', context)
 
-
+def checkout(request):
+    context = {}
+    return render(request, 'checkout.html', context)
 # view the student view
 def MoviesView(request):
     movies = Movies.objects.all()
     context = {'movies': movies}
     return render(request, 'films.html', context)
-
-class screenListView(ListView):
-    def get_queryset(self):
-        return ScreenShowing.objects.all().order_by('name')
-
-
+"""
 def DiscountView(request):
     discounts = TicketDiscount.objects.annotate(offer=((F('total_price') - F('sale_price')) / F('total_price')) * 100)
     context = {'discounts': discounts}
     return render(request, 'offersAndDiscounts.html', context)
-
+"""
 
 # this is the buy tickets view for students
 def BuyTicketsView(request, id):
@@ -68,7 +65,7 @@ def addScreenShowing(request):
     return render(request, 'addShowing.html', {'form': form})
 
 class updateShowings(UpdateView):
-    model = ScreenShowing
+    model = Screen
     fields = '__all__'
     template_name = 'updateShowing.html'
     success_url = reverse_lazy('home')

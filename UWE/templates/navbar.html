@@ -26,9 +26,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'about_us'%}" style="color: #d4c27d;"><strong>| About Us |</strong><span class="sr-only"></span></a>
       </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{%url 'offers&discounts'%}" style="color: #d4c27d;"><strong>| Offers & Discounts |</strong><span class="sr-only"></span></a>
-        </li>
+
 
         {% elif user.accountOptions == 'is_cinema_manager' %}
         <div class="collapse navbar-collapse" id="navbarSupportedContent2">
@@ -36,12 +34,7 @@
            <li class="nav-item active">
         <a class="nav-link" href="{%url 'films'%}" style="color: #d4c27d;"><strong>| Films |</strong> <span class="sr-only"></span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'about_us'%}" style="color: #d4c27d;"><strong>| About Us |</strong><span class="sr-only"></span></a>
-      </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{%url 'offers&discounts'%}" style="color: #d4c27d;"><strong>| Offers & Discounts |</strong><span class="sr-only"></span></a>
-        </li>
+
         <li class="nav-item active">
         <a class="nav-link" href="{%url 'add-movie'%}" style="color: #d4c27d;"><strong>| Add Movie |</strong><span class="sr-only"></span></a>
         </li>
@@ -63,12 +56,6 @@
            <li class="nav-item active">
         <a class="nav-link" href="{%url 'films'%}" style="color: #d4c27d;"><strong>| Films |</strong> <span class="sr-only"></span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'about_us'%}" style="color: #d4c27d;"><strong>| About Us |</strong><span class="sr-only"></span></a>
-      </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{%url 'offers&discounts'%}" style="color: #d4c27d;"><strong>| Offers & Discounts |</strong><span class="sr-only"></span></a>
-        </li>
 
         <li class="nav-item active">
         <a class="nav-link" href="{%url 'add-club'%}" style="color: #d4c27d;"><strong>| Add Student Club |</strong><span class="sr-only"></span></a>
@@ -83,9 +70,6 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'about_us'%}" style="color: #d4c27d;"><strong>| About Us |</strong><span class="sr-only"></span></a>
       </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{%url 'offers&discounts'%}" style="color: #d4c27d;"><strong>| Offers & Discounts |</strong><span class="sr-only"></span></a>
-        </li>
         {% endif %}
     </ul>
 </div>

@@ -80,36 +80,18 @@ class Movies(models.Model):
             url = ''
         return url
 
-class ScreenShowing(models.Model):
+class Screen(models.Model):
     movie = models.ForeignKey(Movies,on_delete=models.CASCADE)
     screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
     tickets = models.IntegerField(default=300, max_length=300)
 
 
-class TicketDiscount(models.Model):
-    total_price = models.IntegerField(default=False)
-    sale_price = models.IntegerField(default=False)
-    new_price = models.IntegerField(default=False)
-
-    def __str__(self):
-        return self.name
-
-    @property
-    def imageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = ''
-        return url
+class Booking(models.Model):
+    movie = models.ForeignKey(Movies,on_delete=models.CASCADE)
+    screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
 
 
-class ticket(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
-    movie = models.OneToOneField(Movies, on_delete=models.CASCADE, default=None)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    quantity = models.IntegerField(max_length=300)
-    price = models.IntegerField()
+
 
 
 # Booking system allows payment type specified to credits, payment authorises when user has paid

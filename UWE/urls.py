@@ -29,7 +29,7 @@ urlpatterns = [
     path('', include('allAccounts.urls')),
     path('about_us', views.about_us, name='about_us'),
     path('films', views.MoviesView, name='films'),
-    path('offers&discounts', views.DiscountView, name='offers&discounts'),
+    path('checkout', views.checkout, name = 'checkout'),
     path('add-movie', views.addMovie, name='add-movie'),
     path('add-Showing', views.addScreenShowing, name='add-showing'),
     path('jsi18n', JavaScriptCatalog.as_view(), name='js-catalog'),
