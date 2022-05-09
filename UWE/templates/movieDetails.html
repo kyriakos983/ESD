@@ -40,11 +40,11 @@
 
             <p style="font-size: 30px;">{{ movie.name }}</p>
              <p class="lead">
-
-               <span><strong><em><strong> Ticket Price : </strong>£ {{movie.ticketPrice}}</em></strong></span>
+              {%for screen in screens%}
+               <span><strong><em><strong> Ticket Price : </strong>£ {{screen.ticketPrice}}</em></strong></span>
 
             </p>
-
+            {%endfor%}
             {% comment %} <form class="d-flex justify-content-left">
               <!-- Default input -->
               <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">

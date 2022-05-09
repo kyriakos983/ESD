@@ -36,30 +36,29 @@ def MoviesView(request):
     return render(request, 'films.html', context)
 
 def BookingsView(request):
+    user = request.user
     movies = Movies.objects.all()
     screen = Screen.objects.all()
-    bookings = Booking.objects.all()
+    bookings = Booking.objects.filter(user =user )
     context = {'movies': movies, 'screen':screen, 'bookings':bookings}
     return render(request, 'bookings.html', context)
 
 # this is the buy tickets view for students
 def BuyTicketsView(request, id):
-    user = request.user
     movie = get_object_or_404(Movies, pk=id)
-    screen = Screen.objects.filter(movie = id )
+    screens = Screen.objects.filter(movie = id )
     bookings = Booking.objects.all()
     if request.method == 'POST':
-        form = BookingForm(request.POST, request.FILES)
+        form = BookingForm( request.POST, request.FILES)
         if form.is_valid():
-            form = Booking.objects.create(
-                user = User.objects.get(pk = request.user),
-                movie =  Movies.objects.get(pk = request.movie),
-            )
+            form = form.save(commit=False)
+            form.user = request.user
+            form.movie = movie
             form.save()
             return redirect('checkout')
     else:
         form = BookingForm()
-    context = {'screen': screen ,'movie': movie,'form': form, 'bookings': bookings, 'user': user}
+    context = {'movie': movie,'form': form, 'bookings': bookings,'screens': screens }
     return render(request, 'buyTickets.html', context)
 
 
@@ -148,8 +147,8 @@ class updateMovieView(UpdateView):
 # student will be able to access the movie details
 def movie_details(request, name, id):
     movie = Movies.objects.get(id=id)
-    screen = Screen.objects.all()
-    context = {'movie': movie, 'screen':screen}
+    screens = Screen.objects.filter(movie = id )
+    context = {'movie': movie, 'screens':screens}
     return render(request, 'movieDetails.html', context)
 
 def user_Selection(request):
