@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 
 from django.contrib.admin import widgets
 from django.forms import ModelForm
@@ -13,9 +13,6 @@ from .models import Movies, Club, ClubRep
 
 
 class MovieForm(ModelForm):
-    date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
-    time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
-
     class Meta:
         model = Movies
         fields = '__all__'
@@ -28,13 +25,13 @@ class AddClubForm(ModelForm):
         fields = '__all__'
 # validation for the date of birth of the club rep
 def dob_validation(value):
-    if value > datetime.date.today():
+    if value > date.today():
         raise forms.ValidationError('Error enter date before current year')
     return value
 
 class AddClubRepForm(ModelForm):
-    date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
-    time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
+    # date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
+    # time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
     dob = forms.DateField(validators=[dob_validation])
 
     class Meta:
@@ -60,8 +57,8 @@ class ScreenShowingForm(ModelForm):
         fields = '__all__'
 
 
-
 class BookingForm(ModelForm):
     class Meta:
         model = Booking
         fields = '__all__'
+        # exclude = ('user',)

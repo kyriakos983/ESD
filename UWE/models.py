@@ -1,10 +1,11 @@
 from datetime import datetime
-
-from django.conf import settings
-from django.db import models
 from allAccounts.models import *
+import uuid
+from django.db import models
 
 
+class MyUUIDModel(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 # model for all the  clubs
 class Club(models.Model):
     club_name = models.CharField(max_length=100, null=True)
@@ -25,8 +26,7 @@ class ClubRep(models.Model):
     club = models.OneToOneField(Club, on_delete=models.CASCADE)
     clubRepFirstName = models.CharField(max_length=50)
     clubRepLastName = models.CharField(max_length=50)
-    dob = models.DateField(default=datetime.strptime('2022-05-04', '%Y-%m-%d'))
-    club_rep_number = models.CharField(max_length=11)
+    club_rep_number = models.CharField(max_length=1300,null=True,blank=True,unique=True, default=uuid.uuid4())
     club_rep_email = models.EmailField(max_length=100, null=True)
 
 
@@ -54,11 +54,7 @@ class screenChoices(models.TextChoices):
 # This contains all the details regarding the movies
 class Movies(models.Model):
     name = models.CharField(max_length=50)
-    ticketPrice = models.IntegerField()
     image = models.ImageField(upload_to='images/', null=True, blank=True)
-
-    # setting the capacity of the screen show by limiting the tickets to 300 mentioned in the requirements
-
     actor1 = models.CharField(max_length=100, null=True, blank=True)
     actor2 = models.CharField(max_length=100, null=True, blank=True)
     actor3 = models.CharField(max_length=100, null=True, blank=True)
@@ -81,19 +77,38 @@ class Movies(models.Model):
         return url
 
 class Screen(models.Model):
-    movie = models.ForeignKey(Movies,on_delete=models.CASCADE)
+    # check how you can
+    movie = models.ForeignKey(Movies,on_delete=models.CASCADE, null=True, blank=True)
     screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
     tickets = models.IntegerField(default=300, max_length=300)
+    ticketPrice = models.IntegerField(null=True, blank=True)
+    time = models.TimeField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.time)
 
 
 class Booking(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    mobile = models.IntegerField()
-    age = models.IntegerField()
-    movie = models.ForeignKey(Movies,on_delete=models.CASCADE)
-    screen = models.CharField(max_length=50, choices=screenChoices.choices, null=True, blank=True)
-    seats = models.CharField(max_length = 100, null=True, blank=True)
+
+    booking_id = models.CharField(max_length=100,null=True,blank=True,unique=True, default=uuid.uuid4())
+    user = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True)
+    movie = models.ForeignKey(Movies, on_delete=models.CASCADE, null=True, blank=True)
+    Name = models.CharField(max_length=100)
+    Email = models.EmailField()
+    Phone_Number = models.BigIntegerField()
+    Age = models.IntegerField()
+    Seats_quantity = models.IntegerField(max_length = 100, null=True, blank=True)
+    Showing = models.ForeignKey(Screen,on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.Showing.time)
+
+    @property
+    def get_total(self):
+        total = self.Showing.ticketPrice * self.Seats_quantity
+        return total
+
+
 
 
 

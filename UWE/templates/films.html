@@ -32,6 +32,8 @@
             {% if user.accountOptions == 'is_student' %}
                   <a href="{%url 'buyTickets' movie.id%}" class="btn btn-outline-secondary " >Buy Tickets</a>
                   <a class ="btn btn-outline-success" href="/product/{{movie.name}}/{{movie.id}}"> View Details</a>
+                <p>Available showings:</p>
+                    {{screen.time}}
 
             <!--Cinema manager selections-->
                     {% elif user.accountOptions == 'is_cinema_manager' %}

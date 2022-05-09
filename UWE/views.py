@@ -22,18 +22,24 @@ def about_us(request):
     return render(request, 'about_us.html', context)
 
 def checkout(request):
-    context = {}
+    user = request.user
+    movie = Movies.objects.all()
+    bookings = Booking.objects.latest('user_id')
+    context = {'movie': movie,'bookings':bookings, 'user':user }
     return render(request, 'checkout.html', context)
 # view the student view
 def MoviesView(request):
     movies = Movies.objects.all()
-    context = {'movies': movies}
+    screen = Screen.objects.all()
+    context = {'movies': movies, 'screen':screen}
     return render(request, 'films.html', context)
 
 # this is the buy tickets view for students
 def BuyTicketsView(request, id):
+    user = request.user
     movie = get_object_or_404(Movies, pk=id)
-    name = request.user
+    screen = Screen.objects.all()
+    bookings = Booking.objects.all()
     if request.method == 'POST':
         form = BookingForm(request.POST, request.FILES)
         if form.is_valid():
@@ -41,7 +47,7 @@ def BuyTicketsView(request, id):
             return redirect('checkout')
     else:
         form = BookingForm()
-    context = {'movie': movie,'form': form}
+    context = {'screen': screen ,'movie': movie,'form': form, 'bookings': bookings, 'user': user}
     return render(request, 'buyTickets.html', context)
 
 
@@ -62,11 +68,12 @@ def addScreenShowing(request):
         form = ScreenShowingForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('addShowing.html')
+            return redirect('films')
     else:
         form = ScreenShowingForm()
     return render(request, 'addShowing.html', {'form': form})
 
+# update a current showing of the film
 class updateShowings(UpdateView):
     model = Screen
     fields = '__all__'
@@ -77,9 +84,19 @@ class updateShowings(UpdateView):
     def get_absolute_url():
         return reverse('home')
 
-# this is for cinema manager
+class accountAmmend(UpdateView):
+    model = User
+    fields = '__all__'
+    template_name = 'accountAmend.html'
+    success_url = reverse_lazy('home')
+
+    @staticmethod
+    def get_absolute_url():
+        return reverse('home')
+# this is for cinema manager to be  able to delete a stored movie
 def delete_movie(request, id):
     movie = get_object_or_404(Movies, pk=id)
+    # posting and storing the data in the database
     if request.method == 'POST':
         movie.delete()
         return redirect('films')
@@ -111,7 +128,7 @@ def addClubRep(request):
     return render(request, 'addClubRep.html', {'form': form})
 
 
-# update details view for cinema manager
+# cinema manager will be able to update movie details of a selected film
 class updateMovieView(UpdateView):
     model = Movies
     fields = '__all__'

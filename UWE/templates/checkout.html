@@ -14,9 +14,10 @@
 {%include 'navbar.html' %}
 <div class="container" style=" text-align: center;">
 
-    <h1>Tickets{{booking.ticket}} </h1>
 
-    <h2>Total: </h2>
+    <h1>Tickets : {{bookings.Seats_quantity}}</h1>
+
+    <h2>Total Price:£ {{bookings.get_total}} </h2>
 
 
     <div id="paypal-button-container"></div>
@@ -32,7 +33,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '88.44'
+                            value: {{bookings.get_total}}
                         }
                     }]
                 });

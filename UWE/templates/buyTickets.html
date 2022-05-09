@@ -16,7 +16,7 @@
 {%include 'navbar.html' %}
 
 <main class="container">
-    <div  style="background-color: white; padding: 50px;  border: 3px solid black;" class="container dark-grey-text mt-5">
+    <div  style="background-color: white; padding: 50px;  border: 0.5px solid black;" class="container dark-grey-text mt-5">
 
       <!--Grid row-->
       <div class="row wow fadeIn">
@@ -24,19 +24,19 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img style="width: 510px; height: 510px; " src="{{movie.imageURL}}" class="card-body">
+          <img style="width: 500px; height: 1000px; " src="{{movie.imageURL}}" class="container">
 
         </div>
         <!--Grid column-->
 
         <!--Grid column-->
-        <div class="col-md-6 mb-4" style="border: 3px solid black; padding: 10px;">
+        <div class="col-md-6 mb-4" style="border: 0.5px solid black; padding: 10px;">
         <div class="container" style="text-align: center;">
           <!--Content-->
           <div class="container" >
-            <p style="font-size: 30px;">{{ movie.name }}</p>
+            <p style="font-size: 50px;"><strong><em>{{ movie.name }}</em></strong></p>
              <p class="lead">
-               <span><strong><em>£ {{movie.ticketPrice}}</em></strong></span>
+               <span><strong><em><strong> Ticket Price : </strong>£ {{screen.ticketPrice}}</em></strong></span>
 
             </p>
 
@@ -45,9 +45,9 @@
         <div class="container">
         <form  method="POST" enctype="multipart/form-data">
 
-        {%csrf_token%}
+          {%csrf_token%}
           {{ form.media }}
-        {{ form|crispy }}
+          {{ form|crispy }}
         <a href="{%url 'checkout'%}"> <input type = 'submit' class="btn btn-secondary" value="Checkout"></a>
         </form>
 

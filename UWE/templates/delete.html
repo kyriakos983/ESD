@@ -12,6 +12,7 @@
     <title>Title</title>
 </head>
 <body style=" background-color: #F5F5DC;">
+<div class="container" style="text-align: center; border: 0.5px solid black; background-color: white; margin-top: 25px;">
 
 <form action="{%url 'delete_movie' movie.id%}" method="POST">
 {% csrf_token %}
@@ -23,7 +24,7 @@
     <input type="submit" value=" Confirm" class="btn btn-outline-danger">
     <a href="{%url 'films'%}" class="btn btn-outline-success">Cancel</a>
         </div>
-
+</div>
 </form>
 
 

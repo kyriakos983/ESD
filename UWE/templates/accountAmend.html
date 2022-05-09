@@ -9,32 +9,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
-    <script src="{% url 'js-catalog' %}"></script>
-    <script src="{% static '/admin/js/core.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
     <title>Title</title>
 </head>
-<body style=" background-color: #F5F5DC;">
+<body style= " background-color: #F5F5DC;">
 {%include 'navbar.html' %}
 <div class="container" style="text-align: center; border: 0.5px solid black; background-color: white; margin-top: 25px;">
-<div style="margin: 20px">
-<h1 style="text-align: center;"> Add film</h1>
-    <hr>
-    </div>
+<h1 style="font: Arial;"> Select a User to Amend details:</h1>
 <br>
+
 <div class=" form-group">
-    <div class="container">
-    <form  method="POST" enctype="multipart/form-data">
-
+    <form  method="POST">
         {%csrf_token%}
-              {{ form.media }}
         {{ form|crispy }}
-        <input type = 'submit' class="btn btn-secondary" value="add Film">
-    </form>
-    </div>
-    </form>
-     </div>
-</div>
 
+        <button class="btn btn-secondary">
+            Update Movie
+        </button>
+    </form>
+
+</div>
+</div>
 </body>
 </html>
