@@ -1,11 +1,14 @@
 from datetime import datetime
+from django.db import models
 from allAccounts.models import *
 import uuid
-from django.db import models
+
 
 
 class MyUUIDModel(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uniqueId = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+
 # model for all the  clubs
 class Club(models.Model):
     club_name = models.CharField(max_length=100, null=True)
@@ -26,6 +29,7 @@ class ClubRep(models.Model):
     club = models.OneToOneField(Club, on_delete=models.CASCADE)
     clubRepFirstName = models.CharField(max_length=50)
     clubRepLastName = models.CharField(max_length=50)
+    dob = models.DateField(default=datetime.strptime('2020-12-31', '%Y-%m-%d'))
     club_rep_number = models.CharField(max_length=1300,null=True,blank=True,unique=True, default=uuid.uuid4())
     club_rep_email = models.EmailField(max_length=100, null=True)
 
@@ -90,7 +94,7 @@ class Screen(models.Model):
 
 class Booking(models.Model):
 
-    booking_id = models.CharField(max_length=100,null=True,blank=True,unique=True, default=uuid.uuid4())
+    booking_uniqueID = models.CharField(max_length=100,null=True,blank=True,unique=True, default=uuid.uuid4())
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True)
     movie = models.ForeignKey(Movies, on_delete=models.CASCADE, null=True, blank=True)
     Name = models.CharField(max_length=100)

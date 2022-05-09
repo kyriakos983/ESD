@@ -24,15 +24,18 @@ class AddClubForm(ModelForm):
         model = Club
         fields = '__all__'
 # validation for the date of birth of the club rep
-def dob_validation(value):
-    if value > date.today():
-        raise forms.ValidationError('Error enter date before current year')
-    return value
+def dob_validation(bday):
+    today = date.today()
+    if bday >= today:
+        raise forms.ValidationError('Error, date must be before current year')
+    else:
+        return today.year - bday.year
 
 class AddClubRepForm(ModelForm):
     # date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
     # time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
-    dob = forms.DateField(validators=[dob_validation])
+    dob = forms.DateField(required=True, validators=[dob_validation], widget=forms.DateInput(attrs={
+        'placeholder': 'Birth Date', 'type': 'date'}))
 
     class Meta:
         model = ClubRep
@@ -40,7 +43,7 @@ class AddClubRepForm(ModelForm):
         labels = {
             'dob': 'Date of Birth',
         }
-        widgets = {
+        widget = {
             'dob': DateInput(attrs={'type': 'date'})
         }
 
