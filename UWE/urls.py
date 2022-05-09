@@ -19,7 +19,7 @@ from UWE import views
 from django.conf.urls.static import static
 from django.conf import settings
 
-from UWE.views import updateMovieView, updateShowings
+from UWE.views import updateMovieView, updateShowings, BookingsView
 
 from django.views.i18n import JavaScriptCatalog
 

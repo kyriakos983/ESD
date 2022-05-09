@@ -51,6 +51,10 @@ def BuyTicketsView(request, id):
     if request.method == 'POST':
         form = BookingForm(request.POST, request.FILES)
         if form.is_valid():
+            form = Booking.objects.create(
+                user = User.objects.get(pk = request.user),
+                movie =  Movies.objects.get(pk = request.movie),
+            )
             form.save()
             return redirect('checkout')
     else:

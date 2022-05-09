@@ -22,7 +22,7 @@
   {% if user.accountOptions == 'is_accounts_manager' %}
  {%for user in users%}
 <img class=" thumbnail" src="{%static 'images/user_icon.png'%}" style="height: 100px; width: 100px;">
-<a class="btn btn-success" href="{%url 'accountAmend' user.id%}" style =" font-size: 20px">{{user.accountOptions}}</a>
+<a class="btn btn-success" href="{%url 'accountAmend' user.id%}" style =" font-size: 20px">{{user.username}}</a>
 
     <hr>
     {%endfor%}

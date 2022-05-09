@@ -67,7 +67,7 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = '__all__'
-        exclude = ('accountOptions', )
+        # exclude = ('accountOptions', )
 
 class ScreenShowingForm(ModelForm):
     time = forms.TimeField(widget=TimeInput(attrs={'type': 'time'}))
@@ -81,4 +81,4 @@ class BookingForm(ModelForm):
     class Meta:
         model = Booking
         fields = '__all__'
-        # exclude = ('user',)
+        exclude = ('user','movie',)
