@@ -30,6 +30,7 @@ urlpatterns = [
     path('about_us', views.about_us, name='about_us'),
     path('films', views.MoviesView, name='films'),
     path('bookings/', views.BookingsView, name='bookings'),
+    path('booking/', views.managerBookingsView, name='managerBookings'),
     path('checkout', views.checkout, name = 'checkout'),
     path('add-movie', views.addMovie, name='add-movie'),
     path('add-Showing', views.addScreenShowing, name='add-showing'),

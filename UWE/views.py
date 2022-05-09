@@ -35,12 +35,20 @@ def MoviesView(request):
     context = {'movies': movies, 'screen':screen}
     return render(request, 'films.html', context)
 
+def managerBookingsView(request):
+    movies = Movies.objects.all()
+    screen = Screen.objects.all()
+    booking = Booking.objects.all()
+    context = {'movies': movies, 'screen':screen,'booking':booking}
+    return render(request, 'managerBookings.html', context)
+# for student
 def BookingsView(request):
     user = request.user
     movies = Movies.objects.all()
     screen = Screen.objects.all()
+    booking = Booking.objects.all()
     bookings = Booking.objects.filter(user =user )
-    context = {'movies': movies, 'screen':screen, 'bookings':bookings}
+    context = {'movies': movies, 'screen':screen, 'bookings':bookings,'booking':booking}
     return render(request, 'bookings.html', context)
 
 # this is the buy tickets view for students

@@ -19,28 +19,14 @@
     </div>
 <div class="row">
 
-    {% for movie in bookings %}
+    {% for movie in booking %}
 
     <div class="col-lg-4">
         <img class=" thumbnail" src="{%static 'images/ticket.png'%}">
         <div class="box-element product">
                 <h1 style =" font-size: 20px">{{movie.name}}</h1>
                     <h6>{{ movie.screen }}</h6>
-
-
                   <hr>
-           <!--Student selections-->
-            {% if user.accountOptions == 'is_student' %}
-                  <h1 style="font-style: Courier New;">Booking details:</h1>
-                    <p>Name on Reservation : {{movie.Name}}</p>
-                    <p>Reserved Seats : {{movie.Seats_quantity}}</p>
-                    <p>Reserved Movie: {{movie.movie}}</p>
-                    <p>Showing Time : {{movie.Showing}}</p>
-                    <p>Amount Paid : {{movie.get_total}}</p>
-
-                <!--Account manager selections-->
-
-                     {% elif user.accountOptions == 'is_accounts_manager' %}
                     <h1 style="font-style: Courier New;">Booking details:</h1>
                     <p>User of Reservation : {{movie.user}}</p>
                     <p>Name on Reservation : {{movie.Name}}</p>
@@ -48,7 +34,7 @@
                     <p>Reserved Movie: {{movie.movie}}</p>
                     <p>Showing Time : {{movie.Showing}}</p>
                     <p>Amount Paid : {{movie.get_total}}</p>
-            {% endif %}
+
 
             </div>
         </div>
