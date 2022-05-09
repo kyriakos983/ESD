@@ -5,7 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import UpdateView, ListView
 from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 from django import forms
-
+from django.contrib.auth import get_user_model
 from UWE.forms import *
 from UWE.models import *
 
@@ -25,7 +25,8 @@ def checkout(request):
     user = request.user
     movie = Movies.objects.all()
     bookings = Booking.objects.latest('user_id')
-    context = {'movie': movie,'bookings':bookings, 'user':user }
+    context = {'movie': movie ,'bookings': bookings, 'user': user }
+    # after checkout complete the ticket will be able to be downloaded
     return render(request, 'checkout.html', context)
 # view the student view
 def MoviesView(request):
@@ -34,11 +35,18 @@ def MoviesView(request):
     context = {'movies': movies, 'screen':screen}
     return render(request, 'films.html', context)
 
+def BookingsView(request):
+    movies = Movies.objects.all()
+    screen = Screen.objects.all()
+    bookings = Booking.objects.all()
+    context = {'movies': movies, 'screen':screen, 'bookings':bookings}
+    return render(request, 'bookings.html', context)
+
 # this is the buy tickets view for students
 def BuyTicketsView(request, id):
     user = request.user
     movie = get_object_or_404(Movies, pk=id)
-    screen = Screen.objects.all()
+    screen = Screen.objects.filter(movie = id )
     bookings = Booking.objects.all()
     if request.method == 'POST':
         form = BookingForm(request.POST, request.FILES)
@@ -84,15 +92,8 @@ class updateShowings(UpdateView):
     def get_absolute_url():
         return reverse('home')
 
-class accountAmmend(UpdateView):
-    model = User
-    fields = '__all__'
-    template_name = 'accountAmend.html'
-    success_url = reverse_lazy('home')
 
-    @staticmethod
-    def get_absolute_url():
-        return reverse('home')
+
 # this is for cinema manager to be  able to delete a stored movie
 def delete_movie(request, id):
     movie = get_object_or_404(Movies, pk=id)
@@ -143,4 +144,23 @@ class updateMovieView(UpdateView):
 # student will be able to access the movie details
 def movie_details(request, name, id):
     movie = Movies.objects.get(id=id)
-    return render(request, 'movieDetails.html', {'movie': movie})
+    screen = Screen.objects.all()
+    context = {'movie': movie, 'screen':screen}
+    return render(request, 'movieDetails.html', context)
+
+def user_Selection(request):
+    User = get_user_model()
+    users = User.objects.all()
+    context = {'users': users}
+    return render(request, 'UserSelection.html',context )
+
+
+class accountAmmend(UpdateView):
+    model = User
+    fields = '__all__'
+    template_name = 'accountAmend.html'
+    success_url = reverse_lazy('home')
+
+    @staticmethod
+    def get_absolute_url():
+        return reverse('home')

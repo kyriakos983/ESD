@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('allAccounts.urls')),
     path('about_us', views.about_us, name='about_us'),
     path('films', views.MoviesView, name='films'),
+    path('bookings', views.BookingsView, name='bookings'),
     path('checkout', views.checkout, name = 'checkout'),
     path('add-movie', views.addMovie, name='add-movie'),
     path('add-Showing', views.addScreenShowing, name='add-showing'),
@@ -39,7 +40,10 @@ urlpatterns = [
     path('<int:pk>/update_movie_details/', updateMovieView.as_view(), name='update_movie_details'),
     path('<int:pk>/update_showing_details/', updateShowings.as_view(), name='update_showing_details'),
     path('product/<str:name>/<int:id>', views.movie_details, name='movieDetails'),
-    path('tickets/<int:id>', views.BuyTicketsView, name='buyTickets')
+    path('tickets/<int:id>', views.BuyTicketsView, name='buyTickets'),
+    path('user_selection', views.user_Selection, name = 'userSelection'),
+path('<int:pk>/accountAmend', views.accountAmmend.as_view(), name='accountAmend'),
+
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

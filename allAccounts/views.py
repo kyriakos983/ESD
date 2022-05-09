@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 
-from allAccounts.forms import RegistserUserForm
+from UWE.forms import RegistserUserForm
 
 
 def register_user(request):

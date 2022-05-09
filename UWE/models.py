@@ -1,9 +1,24 @@
 from datetime import datetime
 from django.db import models
-from allAccounts.models import *
+from django.contrib.auth.models import AbstractUser
 import uuid
 
 
+
+
+class Accounts(models.TextChoices):
+    is_student = 'is_student'
+    is_clubRep = 'is_clubRep'
+    is_cinema_manager = 'is_cinema_manager'
+    is_accounts_manager = 'is_accounts_manager'
+
+
+
+# Abstract user class with options for different user accounts.
+class User(AbstractUser):
+    accountOptions = models.CharField(max_length=50, choices=Accounts.choices, default=None, null=True, blank=True)
+    #tickets = models.ForeignKey(ticket,on_delete=models.CASCADE)
+    # bookings = models.ForeignKey(Booking, on_delete=models.CASCADE, null=True, blank=True)
 
 class MyUUIDModel(models.Model):
     uniqueId = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -30,7 +45,7 @@ class ClubRep(models.Model):
     clubRepFirstName = models.CharField(max_length=50)
     clubRepLastName = models.CharField(max_length=50)
     dob = models.DateField(default=datetime.strptime('2020-12-31', '%Y-%m-%d'))
-    club_rep_number = models.CharField(max_length=1300,null=True,blank=True,unique=True, default=uuid.uuid4())
+    # club_rep_number = models.CharField(max_length=1300,null=True,blank=True,unique=True, default=uuid.uuid4())
     club_rep_email = models.EmailField(max_length=100, null=True)
 
 
@@ -87,14 +102,14 @@ class Screen(models.Model):
     tickets = models.IntegerField(default=300, max_length=300)
     ticketPrice = models.IntegerField(null=True, blank=True)
     time = models.TimeField(null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return str(self.time)
 
 
 class Booking(models.Model):
-
-    booking_uniqueID = models.CharField(max_length=100,null=True,blank=True,unique=True, default=uuid.uuid4())
+    #booking_uniqueID = models.CharField(max_length=100,null=True,blank=True,unique=True, default=uuid.uuid4())
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True)
     movie = models.ForeignKey(Movies, on_delete=models.CASCADE, null=True, blank=True)
     Name = models.CharField(max_length=100)

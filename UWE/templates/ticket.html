@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="">
+   <head>
+      <link rel="stylesheet" href="{% static 'style.css' %}" />
+      <title>Ticket</title>
+      <meta id="meta" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+      body {
+        background: #e5dcbe;
+      }
+
+      .title {
+        padding: 10px;
+        color: white;
+        text-decoration: none;
+      }
+
+      .card {
+        margin: 100px auto;
+        border-radius: 10px;
+        border: none;
+      }
+
+      .pass-h {
+        border-radius: 10px 10px 0px 0px;
+        background: linear-gradient(45deg, #ff0000, #ff4343);
+    }
+          .info {
+        line-height: 40px;
+        background: #000;
+        color: #ffffff;
+        font-size: 20px;
+        border: solid 1px;
+        border-right: 0px;
+        border-radius: 50px 0px 0px 50px;
+      }
+
+      h3 span {
+        font-weight: 400;
+      }
+    </style>
+
+   </head>
+   <body>
+      <div class="container">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-8 card shadow">
+              <div class="row justify-content-around pass-h title">
+                <div class="col-4">
+                  <h2> <i class="fa fa-video-camera"></i> Ticket</h2>
+                </div>
+                <div class="col-6">
+                  <h2 style="text-align:center">{{Booking.Showing.ticketPrice}} </h2>
+                </div>
+              </div>
+              <div class="row mt-4 mb-4">
+                <div class="col-3">
+                  <img class="img-fluid shadow-sm border"
+                    src="https://www.ruletech.com.au/wp-content/uploads/2018/06/qr-code-rule-website.png">
+                </div>
+                <div class="col-9">
+                  <div class="row">
+                    <div class="col-6">
+                      <h3>Booking ID :<span> {{Booking.booking_uniqueID}}</span> </h3>
+                      <h3>Price :<span> (Booking.Showing.ticketPrice)</span> </h3>
+                    </div>
+                    <div class="col-6">
+                      <h3>Seats: <span> (Booking.seatQuantity)</span> </h3>
+                      <h3>Time :<span> (Booking.movie.time)</span> </h3>
+                      <h3>Screen :<span> (Booking.showing.screen) </span> </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
+

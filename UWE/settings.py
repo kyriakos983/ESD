@@ -132,11 +132,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'allAccounts.user'
+AUTH_USER_MODEL = 'UWE.user'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 SITE_ID = 1
 
-SESSION_COOKIE_AGE = 300
+SESSION_COOKIE_AGE = 600
 
