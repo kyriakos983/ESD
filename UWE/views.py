@@ -133,7 +133,7 @@ class updateMovieView(UpdateView):
     model = Movies
     fields = '__all__'
     template_name = 'updateMovie.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('home  ')
 
     @staticmethod
     def get_absolute_url():
@@ -144,3 +144,9 @@ class updateMovieView(UpdateView):
 def movie_details(request, name, id):
     movie = Movies.objects.get(id=id)
     return render(request, 'movieDetails.html', {'movie': movie})
+
+#
+def ticketView(request):
+    #    ticket = get_object_or_404(Movies, pk=id)
+
+    return render(request, 'ticket.html')

@@ -39,7 +39,9 @@ urlpatterns = [
     path('<int:pk>/update_movie_details/', updateMovieView.as_view(), name='update_movie_details'),
     path('<int:pk>/update_showing_details/', updateShowings.as_view(), name='update_showing_details'),
     path('product/<str:name>/<int:id>', views.movie_details, name='movieDetails'),
-    path('tickets/<int:id>', views.BuyTicketsView, name='buyTickets')
+    path('tickets/<int:id>', views.BuyTicketsView, name='buyTickets'),
+    path('ticket',views.ticketView, name='ticket')
+
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
