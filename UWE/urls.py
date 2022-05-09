@@ -42,7 +42,9 @@ urlpatterns = [
     path('product/<str:name>/<int:id>', views.movie_details, name='movieDetails'),
     path('tickets/<int:id>', views.BuyTicketsView, name='buyTickets'),
     path('user_selection', views.user_Selection, name = 'userSelection'),
-path('<int:pk>/accountAmend', views.accountAmmend.as_view(), name='accountAmend'),
+    path('<int:pk>/accountAmend', views.accountAmmend.as_view(), name='accountAmend'),
+    path('ticket',views.ticketView, name='ticket')
+
 
 
 ]
